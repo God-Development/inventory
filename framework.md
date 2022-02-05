@@ -39,9 +39,9 @@ Furthermore, I am only linking the <b>bare minimum</b> for inventory support.<br
 
 ### Add to server/common.lua
 ```lua
-AddEventHandler('linden_inventory:loaded', function(data)
+AddEventHandler('luci-inventory:loaded', function(data)
 	ESX.Items = data
 end)
 ```
 
-<h4 align='center'>If this confused you, just <b><a href='https://github.com/thelindat/es_extended'>download the fork</a></b>.</h4>
+<h4 align='center'>If this confused you, just <b><a href='https://github.com/5mLucifer/es_extended'>download the fork</a></b>.</h4>
