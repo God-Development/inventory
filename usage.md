@@ -34,14 +34,14 @@ title: Usage
 
 #### [#](usage/item-data) Retrieve item data from server
 ```lua
-  ESX.TriggerServerCallback('linden_inventory:getItem',function(xItem)
+  ESX.TriggerServerCallback('luci-inventory:getItem',function(xItem)
     water = xItem
     print(xItem.count)
   end, 'water')
 ```
 or
 ```lua
-  ESX.TriggerServerCallback('linden_inventory:getItemCount',function(count)
+  ESX.TriggerServerCallback('luci-inventory:getItemCount',function(count)
     water = count
     print(count)
   end, 'water')
@@ -52,7 +52,7 @@ or
 ```lua
 RegisterCommand('getmeta', function(source, args, rawCommand)
 	local xPlayer = ESX.GetPlayerFromId(source)
-	local slot = exports['linden_inventory']:getPlayerSlot(xPlayer, 1)
+	local slot = exports['luci-inventory']:getPlayerSlot(xPlayer, 1)
 	print(slot.metadata.serial)
 end, true)
 ```
@@ -67,9 +67,9 @@ end, true)
 * You can define an owner for a stash, attaching their player identifier
 * You can have owned stashes with the same name as long as the identifier doesn't match
 ```lua
-	exports['linden_inventory']:OpenStash({ id = 'Hospital Locker', slots = 70, job= 'ambulance'})
-	exports['linden_inventory']:OpenStash({ id = 'Bank Deposit Box', slots = 20, owner = ESX.GetPlayerData().identifier()})
-	exports['linden_inventory']:OpenStash({ id = 'Personal Locker', slots = 20, job = 'police', owner = ESX.GetPlayerData().identifier()})
+	exports['luci-inventory']:OpenStash({ id = 'Hospital Locker', slots = 70, job= 'ambulance'})
+	exports['luci-inventory']:OpenStash({ id = 'Bank Deposit Box', slots = 20, owner = ESX.GetPlayerData().identifier()})
+	exports['luci-inventory']:OpenStash({ id = 'Personal Locker', slots = 20, job = 'police', owner = ESX.GetPlayerData().identifier()})
 ```
 * Example for adding a stash to `esx_property` in Snippets
 
@@ -108,7 +108,7 @@ All your old items using `ESX.RegisterUsableItem` still work, however I would pe
 ```
 
 ```lua
-AddEventHandler('linden_inventory:burger', function(item, wait, cb)
+AddEventHandler('luci-inventory:burger', function(item, wait, cb)
 	cb(true)
 	SetTimeout(wait, function()
 		if not cancelled then
@@ -144,7 +144,7 @@ end)
 					[1] = {slot=1, name='meat', count=meatAmount, metadata={grade=grade, animal=Config.Animals[hash].ModNam, type=Config.Animals[hash].label..' meat', description='A cut of '..grade..' grade meat from a '..Config.Animals[hash].label}}
 				}
 			}
-			exports['linden_inventory']:CreateNewDrop(xPlayer, data)
+			exports['luci-inventory']:CreateNewDrop(xPlayer, data)
 			TriggerClientEvent('mythic_notify:client:SendAlert', xPlayer.source, {type = 'inform', text = 'You have slaughtered an animal yielding a total of ' ..meatAmount.. 'pieces of meat.'})
 		end
 	end
