@@ -73,5 +73,5 @@ ensure esx_identity
 ensure esx_skin
 
 ## ESX Addons
-ensure linden_inventory            # You may need to load this after resources using ESX.RegisterUsableItem
+ensure luci-inventory            # You may need to load this after resources using ESX.RegisterUsableItem
 ```
