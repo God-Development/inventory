@@ -28,7 +28,7 @@ ensure extendedmode       	# extendedmode provides es_extended, you don't need t
 ** etc
 ** etc
 ** etc
-ensure linden_inventory		# have it load after resources that register items, or just last
+ensure luci-inventory		# have it load after resources that register items, or just last
 ```
 
 
@@ -80,7 +80,7 @@ ensure linden_inventory		# have it load after resources that register items, or 
 		-- Create Extended Player Object
 		local xPlayer = CreateExtendedPlayer(playerId, identifier, userData.group, userData.accounts, userData.weight, userData.job, userData.playerName, userData.coords)
 		ESX.Players[playerId] = xPlayer
-		TriggerEvent('linden_inventory:setPlayerInventory', xPlayer, userData.inventory)
+		TriggerEvent('luci-inventory:setPlayerInventory', xPlayer, userData.inventory)
 		TriggerEvent('esx:playerLoaded', playerId, xPlayer)
 
 		xPlayer.triggerEvent('esx:playerLoaded', {
@@ -143,13 +143,13 @@ end
 	end
 
 	self.getPlayerSlot = function(slot)
-		return exports['linden_inventory']:getPlayerSlot(self, slot)
+		return exports['luci-inventory']:getPlayerSlot(self, slot)
 	end
 ```
 * Search for `self.getInventory` and replace the function with
 ```lua
 	self.getInventory = function(minimal)
-		return exports['linden_inventory']:getPlayerInventory(self, minimal)
+		return exports['luci-inventory']:getPlayerInventory(self, minimal)
 	end
 ```
 
@@ -163,7 +163,7 @@ end
 				local prevMoney = account.money
 				local newMoney = ESX.Math.Round(money)
 				account.money = newMoney
-				if accountName ~= 'bank' then exports['linden_inventory']:setInventoryItem(self, accountName, money) end
+				if accountName ~= 'bank' then exports['luci-inventory']:setInventoryItem(self, accountName, money) end
 				self.triggerEvent('esx:setAccountMoney', account)
 			end
 		end
@@ -176,7 +176,7 @@ end
 			if account then
 				local newMoney = account.money + ESX.Math.Round(money)
 				account.money = newMoney
-				if accountName ~= 'bank' then exports['linden_inventory']:addInventoryItem(self, accountName, money) end
+				if accountName ~= 'bank' then exports['luci-inventory']:addInventoryItem(self, accountName, money) end
 				self.triggerEvent('esx:setAccountMoney', account)
 			end
 		end
@@ -189,46 +189,46 @@ end
 			if account then
 				local newMoney = account.money - ESX.Math.Round(money)
 				account.money = newMoney
-				if accountName ~= 'bank' then exports['linden_inventory']:removeInventoryItem(self, accountName, money) end
+				if accountName ~= 'bank' then exports['luci-inventory']:removeInventoryItem(self, accountName, money) end
 				self.triggerEvent('esx:setAccountMoney', account)
 			end
 		end
 	end
 
 	self.getInventoryItem = function(name, metadata)
-		return exports['linden_inventory']:getInventoryItem(self, name, metadata)
+		return exports['luci-inventory']:getInventoryItem(self, name, metadata)
 	end
 
 	self.addInventoryItem = function(name, count, metadata, slot)
-		exports['linden_inventory']:addInventoryItem(self, name, count, metadata, slot)
+		exports['luci-inventory']:addInventoryItem(self, name, count, metadata, slot)
 	end
 
 	self.removeInventoryItem = function(name, count, metadata)
-		exports['linden_inventory']:removeInventoryItem(self, name, count, metadata)
+		exports['luci-inventory']:removeInventoryItem(self, name, count, metadata)
 	end
 
 	self.setInventoryItem = function(name, count, metadata)
-		exports['linden_inventory']:setInventoryItem(self, name, count, metadata)
+		exports['luci-inventory']:setInventoryItem(self, name, count, metadata)
 	end
 
 	self.getWeight = function()
-		return exports['linden_inventory']:getWeight(self)
+		return exports['luci-inventory']:getWeight(self)
 	end
 
 	self.getMaxWeight = function()
-		return exports['linden_inventory']:getMaxWeight(self)
+		return exports['luci-inventory']:getMaxWeight(self)
 	end
 
 	self.canCarryItem = function(name, count)
-		return exports['linden_inventory']:canCarryItem(self, name, count)
+		return exports['luci-inventory']:canCarryItem(self, name, count)
 	end
 
 	self.canSwapItem = function(firstItem, firstItemCount, testItem, testItemCount)
-		return exports['linden_inventory']:canSwapItem(self, firstItem, firstItemCount, testItem, testItemCount)
+		return exports['luci-inventory']:canSwapItem(self, firstItem, firstItemCount, testItem, testItemCount)
 	end
 
 	self.setMaxWeight = function(newWeight)
-		return exports['linden_inventory']:setMaxWeight(self, newWeight)
+		return exports['luci-inventory']:setMaxWeight(self, newWeight)
 	end
 ```
 * Remove the following functions
